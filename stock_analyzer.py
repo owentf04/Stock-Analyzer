@@ -57,7 +57,11 @@ def graph_data(df_annual, df_ttm):
 
     # Create subplots
     fig, axs = plt.subplots(3, 3, figsize=(20, 11))
+    plt.rcParams.update({'font.size': 8})
     
+    mng = plt.get_current_fig_manager()
+    mng.window.wm_geometry("1900x1200+0+0")
+
     # Define titles
     title1 = f'Revenue: CAGR 10y, 5y, 3y, 1y: {cagr[0][0]}% {cagr[0][1]}% {cagr[0][2]}% {cagr[0][3]}%'
     title2 = f'Free Cash Flow per Share: CAGR 10y, 5y, 3y, 1y: {cagr[1][0]}% {cagr[1][1]}% {cagr[1][2]}% {cagr[1][3]}%'
@@ -128,7 +132,7 @@ def cagr_stats(df_a):
     return result
 
 def cagr_formula(years, col):
-    if col.iloc[-(1 + years)] <= 0 or col.iloc[-1] <= 0:
+    if col.iloc[-(1 + years)] <= 0:
         return 0
     return (col.iloc[-1] / col.iloc[-(1 + years)]) ** (1 / years) - 1
 
